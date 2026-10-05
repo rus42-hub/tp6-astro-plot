@@ -5,8 +5,8 @@ import Layout from "../../layouts/Layout.astro";
 const species = [...new Set(penguins.map((penguin) => penguin.species))];
 ---
 
-<Layout title="Rendu statique">
-  <h1 class="text-3xl font-bold">Rendu statique</h1>
+<Layout title="Manchots par espèce">
+  <h1 class="text-3xl font-bold">Manchots par espèce</h1>
   <nav class="mt-6 flex flex-wrap gap-3" aria-label="Espèces de manchots">
     {
       species.map((name) => (
