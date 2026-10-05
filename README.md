@@ -1,6 +1,6 @@
 - URL site WEB :
-- URL dépôt GitHub :
-- URL Notebook Observable : Non utilisé pour ce TP
+- URL dépôt GitHub : https://github.com/rus42-hub/tp6-astro-plot
+- URL Notebook Observable :
 - Nom : Budniak
 - Prénom : Ruslana
 - Nom binome :
