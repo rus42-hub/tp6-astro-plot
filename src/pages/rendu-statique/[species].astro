@@ -1,0 +1,22 @@
+---
+import penguins from "../../assets/penguins.json";
+import GraphicSpecies from "../../components/GraphicSpecies.astro";
+import Layout from "../../layouts/Layout.astro";
+
+export function getStaticPaths() {
+  const species = [...new Set(penguins.map((penguin) => penguin.species))];
+
+  return species.map((name) => ({
+    params: { species: name },
+  }));
+}
+
+const { species } = Astro.params;
+---
+
+<Layout title={`Manchots ${species}`}>
+  <a class="text-teal-800 underline" href="/rendu-statique/">Retour aux espèces</a>
+  <section class="chart-card mt-6">
+    <GraphicSpecies species={species as string} />
+  </section>
+</Layout>
