@@ -1,0 +1,35 @@
+---
+import * as Plot from "@observablehq/plot";
+import penguins from "../assets/penguins.json";
+import PlotFigure from "./PlotFigure.astro";
+
+interface Props {
+  species: string;
+}
+
+const { species } = Astro.props;
+const selectedPenguins = penguins.filter(
+  (penguin) => penguin.species === species,
+);
+---
+
+<PlotFigure
+  options={{
+    title: `Manchots ${species}`,
+    subtitle: "Longueur et profondeur du bec",
+    caption: `${selectedPenguins.length} manchots`,
+    ariaLabel: `Nuage de points des manchots ${species}`,
+    grid: true,
+    color: { legend: true },
+    x: { label: "Longueur du bec (mm)" },
+    y: { label: "Profondeur du bec (mm)" },
+    marks: [
+      Plot.dot(selectedPenguins, {
+        x: "culmen_length_mm",
+        y: "culmen_depth_mm",
+        stroke: "species",
+        tip: true,
+      }),
+    ],
+  }}
+/>
