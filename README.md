@@ -1,7 +1,8 @@
 - URL site WEB :
-- URL Notebook Observable :
-- Nom :
-- Prénom :
+- URL dépôt GitHub :
+- URL Notebook Observable : Non utilisé pour ce TP
+- Nom : Budniak
+- Prénom : Ruslana
 - Nom binome :
 - Prénom binome :
 
