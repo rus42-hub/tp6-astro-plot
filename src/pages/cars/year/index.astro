@@ -1,0 +1,19 @@
+---
+import cars from "../../../assets/cars.json";
+import Layout from "../../../layouts/Layout.astro";
+
+const years = [...new Set(cars.map((car) => car.year))].sort(
+  (firstYear, secondYear) => firstYear - secondYear,
+);
+---
+
+<Layout title="Voitures par année">
+  <h1 class="text-3xl font-bold">Voitures par année</h1>
+  <nav class="mt-6 flex flex-wrap gap-3" aria-label="Années des voitures">
+    {
+      years.map((year) => (
+        <a class="species-link" href={`/cars/year/${year}/`}>19{year}</a>
+      ))
+    }
+  </nav>
+</Layout>

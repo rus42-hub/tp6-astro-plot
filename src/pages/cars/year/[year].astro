@@ -1,0 +1,43 @@
+---
+import * as Plot from "@observablehq/plot";
+import cars from "../../../assets/cars.json";
+import PlotFigure from "../../../components/PlotFigure.astro";
+import Layout from "../../../layouts/Layout.astro";
+
+export function getStaticPaths() {
+  const years = [...new Set(cars.map((car) => car.year))];
+
+  return years.map((year) => ({
+    params: { year: year.toString() },
+  }));
+}
+
+const { year } = Astro.params;
+const filteredCars = cars.filter((car) => car.year.toString() === year);
+---
+
+<Layout title={`Voitures de 19${year}`}>
+  <a class="text-teal-800 underline" href="/cars/year/">Retour aux années</a>
+  <section class="chart-card mt-6">
+    <PlotFigure
+      options={{
+        title: `Voitures de 19${year}`,
+        subtitle: "Poids et consommation",
+        caption: `${filteredCars.length} voitures`,
+        ariaLabel: `Nuage de points des voitures de 19${year}`,
+        grid: true,
+        color: { type: "ordinal", legend: true, label: "Cylindres" },
+        x: { label: "Poids (lb)" },
+        y: { label: "Consommation (mpg)" },
+        marks: [
+          Plot.dot(filteredCars, {
+            x: "weight (lb)",
+            y: "economy (mpg)",
+            stroke: "cylinders",
+            tip: true,
+          }),
+        ],
+      }}
+    />
+  </section>
+</Layout>
