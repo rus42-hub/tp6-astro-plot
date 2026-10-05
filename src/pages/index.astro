@@ -1,21 +1,25 @@
 ---
-import PlotFigure from "../components/PlotFigure.astro";
+import GraphicSpecies from "../components/GraphicSpecies.astro";
 import Layout from "../layouts/Layout.astro";
-import * as Plot from "@observablehq/plot";
 import penguins from "../assets/penguins.json";
+
+const species = [...new Set(penguins.map((penguin) => penguin.species))];
 ---
 
-<Layout>
-  <h1 class="text-2xl">Test Astro et Plot (Observablehq)</h1>
-  <PlotFigure
-    options={{
-      marks: [
-        Plot.dot(penguins, {
-          x: "culmen_length_mm",
-          y: "culmen_depth_mm",
-          stroke: "species",
-        }),
-      ],
-    }}
-  />
+<Layout title="Tous les manchots">
+  <h1 class="text-3xl font-bold">Tous les manchots</h1>
+
+  <nav class="mt-6 flex flex-wrap gap-3" aria-label="Espèces de manchots">
+    {species.map((name) => <a class="species-link" href={`#${name}`}>{name}</a>)}
+  </nav>
+
+  <div class="mt-8 flex snap-x snap-mandatory gap-6 overflow-x-auto pb-5">
+    {
+      species.map((name) => (
+        <section id={name} class="chart-card min-w-full snap-start scroll-mt-6">
+          <GraphicSpecies species={name} />
+        </section>
+      ))
+    }
+  </div>
 </Layout>
